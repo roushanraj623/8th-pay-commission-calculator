@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8th Pay Commission Salary Calculator</title>
+    <!-- Tailwind CSS for sleek, modern styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Main Container -->
+    <main class="max-w-2xl width-full mx-auto my-10 p-6 bg-white rounded-2xl shadow-xl border border-gray-100 flex-grow">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold text-blue-900 mb-2">💰 8th Pay Commission Calculator</h1>
+            <p class="text-gray-500 text-sm">Calculate your projected revised basic pay across different fitment factor demands.</p>
+        </div>
+
+        <!-- Input Box -->
+        <div class="bg-blue-50 p-5 rounded-xl mb-8 border border-blue-100">
+            <label for="basicPay" class="block text-sm font-semibold text-blue-900 mb-2">Enter Current Basic Pay (₹):</label>
+            <div class="relative rounded-md shadow-sm">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-500 sm:text-sm">₹</span>
+                </div>
+                <input type="number" id="basicPay" value="60000" class="block w-full pl-8 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg font-medium outline-none" placeholder="e.g. 60000" oninput="calculateSalary()">
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="space-y-4">
+            <h2 class="text-lg font-bold text-gray-700 mb-3">Projected Scenarios</h2>
+
+            <!-- Scenario 1 -->
+            <div class="flex items-center justify-between p-4 bg-orange-50 border border-orange-100 rounded-xl">
+                <div>
+                    <h3 class="font-bold text-orange-900">Conservative Speculation</h3>
+                    <p class="text-xs text-orange-700">Fitment Factor: 1.83x</p>
+                </div>
+                <div class="text-right">
+                    <span id="resConservative" class="text-xl font-black text-orange-900">₹0.00</span>
+                </div>
+            </div>
+
+            <!-- Scenario 2 -->
+            <div class="flex items-center justify-between p-4 bg-blue-50 border border-blue-100 rounded-xl">
+                <div>
+                    <h3 class="font-bold text-blue-900">Common Media Speculation</h3>
+                    <p class="text-xs text-blue-700">Fitment Factor: 2.86x</p>
+                </div>
+                <div class="text-right">
+                    <span id="resMedia" class="text-xl font-black text-blue-900">₹0.00</span>
+                </div>
+            </div>
+
+            <!-- Scenario 3 -->
+            <div class="flex items-center justify-between p-4 bg-green-50 border border-green-100 rounded-xl">
+                <div>
+                    <h3 class="font-bold text-green-900">Official Union Demand (NC-JCM)</h3>
+                    <p class="text-xs text-green-700">Fitment Factor: 3.833x</p>
+                </div>
+                <div class="text-right">
+                    <span id="resUnion" class="text-xl font-black text-green-900">₹0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer Disclaimer -->
+        <div class="mt-8 p-4 bg-gray-100 rounded-lg border border-gray-200">
+            <p class="text-xs text-gray-600 leading-relaxed">
+                <strong>⚠️ Note:</strong> These projections strictly estimate your revised <strong>Basic Pay</strong>. Final take-home pay structures will vary significantly once official allowances (HRA, DA, TA) are declared by the Commission.
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-xs text-gray-400">
+        8th Pay Commission Tracker &copy; 2026
+    </footer>
+
+    <!-- Calculator Engine Logic -->
+    <script>
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN', { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+        }
+
+        function calculateSalary() {
+            // Get user input value
+            const basicPay = parseFloat(document.getElementById('basicPay').value) || 0;
+
+            // Calculate options
+            const conservative = basicPay * 1.83;
+            const media = basicPay * 2.86;
+            const union = basicPay * 3.833;
+
+            // Inject formatted outputs back into the web elements instantly
+            document.getElementById('resConservative').innerText = formatCurrency(conservative);
+            document.getElementById('resMedia').innerText = formatCurrency(media);
+            document.getElementById('resUnion').innerText = formatCurrency(union);
+        }
+
+        // Initialize calculations immediately on page load
+        window.onload = calculateSalary;
+    </script>
+</body>
+</html>
